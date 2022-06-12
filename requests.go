@@ -45,7 +45,7 @@ type ReqRedact struct {
 // ReqInvite3PID is the JSON request for https://matrix.org/docs/spec/client_server/r0.2.0.html#id57
 // It is also a JSON object used in https://matrix.org/docs/spec/client_server/r0.2.0.html#post-matrix-client-r0-createroom
 type ReqInvite3PID struct {
-	IDServer string `json:"id_server"`
+	IDServer string `json:"id_server,omitempty"`
 	Medium   string `json:"medium"`
 	Address  string `json:"address"`
 }
@@ -76,4 +76,22 @@ type ReqUnbanUser struct {
 type ReqTyping struct {
 	Typing  bool  `json:"typing"`
 	Timeout int64 `json:"timeout"`
+}
+
+// ReqCreateUser is the JSON request for https://matrix-org.github.io/synapse/latest/admin_api/user_admin_api.html
+type ReqCreateUser struct {
+	Password      string           `json:"user_password"`
+	LogoutDevices bool             `json:"logout_devices,omitempty"`
+	DisplayName   string           `json:"displayname,omitempty"`
+	ThreePIDs     []ReqInvite3PID  `json:"threepids,omitempty"`
+	ExternalIDs   []ReqExternalIDs `json:"external_ids,omitempty"`
+	AvatarURL     string           `json:"avatar_url,omitempty"`
+	Admin         string           `json:"admin,omitempty"`
+	Deactivated   bool             `json:"deactivated,omitempty"`
+	UserType      string           `json:"user_type,omitempty"`
+}
+
+type ReqExternalIDs struct {
+	AuthProvider string `json:"auth_provider"`
+	ExternalID   string `json:"external_id"`
 }

@@ -22,6 +22,7 @@ import (
 type Client struct {
 	HomeserverURL *url.URL     // The base homeserver URL
 	Prefix        string       // The API prefix eg '/_matrix/client/r0'
+	AdminPrefix   string       // The Admin API prefix eg '/_synapse/admin/v2'
 	UserID        string       // The user ID of the client. Used for forming HTTP paths which use the client's user ID.
 	AccessToken   string       // The access_token for the client.
 	Client        *http.Client // The underlying HTTP client which will be used to make HTTP requests.
@@ -56,6 +57,11 @@ func (e HTTPError) Error() string {
 // BuildURL builds a URL with the Client's homeserver/prefix set already.
 func (cli *Client) BuildURL(urlPath ...string) string {
 	ps := append([]string{cli.Prefix}, urlPath...)
+	return cli.BuildBaseURL(ps...)
+}
+
+func (cli *Client) BuildAdminURL(urlPath ...string) string {
+	ps := append([]string{cli.AdminPrefix}, urlPath...)
 	return cli.BuildBaseURL(ps...)
 }
 
@@ -776,6 +782,17 @@ func (cli *Client) TurnServer() (resp *RespTurnServer, err error) {
 	return
 }
 
+// Create a new matrix user See https://matrix-org.github.io/synapse/latest/admin_api/user_admin_api.html
+//  resp, err := cli.CreateRoom(&gomatrix.ReqCreateRoom{
+//  	Preset: "public_chat",
+//  })
+//  fmt.Println("Room:", resp.RoomID)
+func (cli *Client) CreateUser(userId string, req *ReqCreateUser) (resp *RespCreateUser, err error) {
+	urlPath := cli.BuildAdminURL("users", userId)
+	err = cli.MakeRequest("PUT", urlPath, req, &resp)
+	return
+}
+
 func txnID() string {
 	return "go" + strconv.FormatInt(time.Now().UnixNano(), 10)
 }
@@ -795,6 +812,7 @@ func NewClient(homeserverURL, userID, accessToken string) (*Client, error) {
 		HomeserverURL: hsURL,
 		UserID:        userID,
 		Prefix:        "/_matrix/client/r0",
+		AdminPrefix:   "/_synapse/admin/v2",
 		Syncer:        NewDefaultSyncer(userID, store),
 		Store:         store,
 	}

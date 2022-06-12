@@ -208,3 +208,26 @@ type RespTurnServer struct {
 	TTL      int      `json:"ttl"`
 	URIs     []string `json:"uris"`
 }
+
+type RespCreateUser struct {
+	Name                    string `json:"name"`
+	IsGuest                 int    `json:"is_guest"`
+	Admin                   int    `json:"next_batch"`
+	ConsentVersion          string `json:"consent_version"`
+	ConsentServerNoticeSent bool   `json:"consent_server_notice_sent"`
+	AppserviceId            string `json:"appservice_id"`
+	CreationTs              int    `json:"creation_ts"`
+	UserType                string `json:"user_type"`
+	Deactivated             int    `json:"deactivated"`
+	ShadowBanned            bool   `json:"shadow_banned"`
+	Displayname             string `json:"displayname"`
+	AvatarUrl               string `json:"avatar_url"`
+	Threepids               []struct {
+		Medium      string `json:"medium"`
+		Address     string `json:"address"`
+		ValidatedAt int64  `json:"validated_at"`
+		AddedAt     int64  `json:"added_at"`
+	} `json:"threepids"`
+	ExternalIds []struct {
+	} `json:"external_ids"`
+}
