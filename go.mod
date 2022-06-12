@@ -1,3 +1,3 @@
-module github.com/matrix-org/gomatrix
+module github.com/michtek/gomatrix
 
-go 1.12
+go 1.14
