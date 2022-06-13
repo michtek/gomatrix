@@ -80,7 +80,7 @@ type ReqTyping struct {
 
 // ReqCreateUser is the JSON request for https://matrix-org.github.io/synapse/latest/admin_api/user_admin_api.html
 type ReqCreateUser struct {
-	Password      string           `json:"user_password"`
+	Password      string           `json:"password"`
 	LogoutDevices bool             `json:"logout_devices,omitempty"`
 	DisplayName   string           `json:"displayname,omitempty"`
 	ThreePIDs     []ReqInvite3PID  `json:"threepids,omitempty"`
