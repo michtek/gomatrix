@@ -95,3 +95,7 @@ type ReqExternalIDs struct {
 	AuthProvider string `json:"auth_provider"`
 	ExternalID   string `json:"external_id"`
 }
+
+type ReqJoinUser struct {
+	UserID string `json:"user_id"`
+}
