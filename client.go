@@ -793,6 +793,12 @@ func (cli *Client) CreateUser(userId string, req *ReqCreateUser) (resp *RespCrea
 	return
 }
 
+func (cli *Client) JoinRoomForUser(roomId string, content interface{}) (resp *RespJoinRoom, err error) {
+	urlPath := cli.BuildAdminURL("join", roomId)
+	err = cli.MakeRequest("PUT", urlPath, content, &resp)
+	return
+}
+
 func txnID() string {
 	return "go" + strconv.FormatInt(time.Now().UnixNano(), 10)
 }
