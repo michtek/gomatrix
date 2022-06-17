@@ -788,13 +788,13 @@ func (cli *Client) TurnServer() (resp *RespTurnServer, err error) {
 //  })
 //  fmt.Println("Room:", resp.RoomID)
 func (cli *Client) CreateUser(userId string, req *ReqCreateUser) (resp *RespCreateUser, err error) {
-	urlPath := cli.BuildAdminURL("users", userId)
+	urlPath := cli.BuildAdminURL("v2", "users", userId)
 	err = cli.MakeRequest("PUT", urlPath, req, &resp)
 	return
 }
 
 func (cli *Client) JoinRoomForUser(roomId string, content interface{}) (resp *RespJoinRoom, err error) {
-	urlPath := cli.BuildAdminURL("join", roomId)
+	urlPath := cli.BuildAdminURL("v1", "join", roomId)
 	err = cli.MakeRequest("POST", urlPath, content, &resp)
 	return
 }
@@ -818,7 +818,7 @@ func NewClient(homeserverURL, userID, accessToken string) (*Client, error) {
 		HomeserverURL: hsURL,
 		UserID:        userID,
 		Prefix:        "/_matrix/client/r0",
-		AdminPrefix:   "/_synapse/admin/v2",
+		AdminPrefix:   "/_synapse/admin",
 		Syncer:        NewDefaultSyncer(userID, store),
 		Store:         store,
 	}
