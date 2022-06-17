@@ -795,7 +795,7 @@ func (cli *Client) CreateUser(userId string, req *ReqCreateUser) (resp *RespCrea
 
 func (cli *Client) JoinRoomForUser(roomId string, content interface{}) (resp *RespJoinRoom, err error) {
 	urlPath := cli.BuildAdminURL("join", roomId)
-	err = cli.MakeRequest("PUT", urlPath, content, &resp)
+	err = cli.MakeRequest("POST", urlPath, content, &resp)
 	return
 }
 
