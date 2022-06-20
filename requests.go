@@ -101,5 +101,5 @@ type ReqJoinUser struct {
 }
 
 type ReqLoginAsUser struct {
-	ValidUntilMs string `json:"valid_until_ms,omitempty"`
+	ValidUntilMs int64 `json:"valid_until_ms,omitempty"`
 }
