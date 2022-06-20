@@ -231,3 +231,8 @@ type RespCreateUser struct {
 	ExternalIds []struct {
 	} `json:"external_ids"`
 }
+
+// RespLogin is the JSON response for http://matrix.org/docs/spec/client_server/r0.6.0.html#post-matrix-client-r0-login
+type RespLoginAsUser struct {
+	AccessToken string `json:"access_token"`
+}

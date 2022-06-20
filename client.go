@@ -783,19 +783,23 @@ func (cli *Client) TurnServer() (resp *RespTurnServer, err error) {
 }
 
 // Create a new matrix user See https://matrix-org.github.io/synapse/latest/admin_api/user_admin_api.html
-//  resp, err := cli.CreateRoom(&gomatrix.ReqCreateRoom{
-//  	Preset: "public_chat",
-//  })
-//  fmt.Println("Room:", resp.RoomID)
 func (cli *Client) CreateUser(userId string, req *ReqCreateUser) (resp *RespCreateUser, err error) {
 	urlPath := cli.BuildAdminURL("v2", "users", userId)
 	err = cli.MakeRequest("PUT", urlPath, req, &resp)
 	return
 }
 
+// Create a new matrix user See https://matrix-org.github.io/synapse/latest/admin_api/user_admin_api.html
 func (cli *Client) JoinRoomForUser(roomId string, content interface{}) (resp *RespJoinRoom, err error) {
 	urlPath := cli.BuildAdminURL("v1", "join", roomId)
 	err = cli.MakeRequest("POST", urlPath, content, &resp)
+	return
+}
+
+// Create a new matrix user See https://matrix-org.github.io/synapse/latest/admin_api/user_admin_api.html
+func (cli *Client) LoginAsUser(userId string, req *ReqLoginAsUser) (resp *RespLoginAsUser, err error) {
+	urlPath := cli.BuildAdminURL("v1", "users", userId, "login")
+	err = cli.MakeRequest("POST", urlPath, req, &resp)
 	return
 }
 

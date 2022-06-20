@@ -99,3 +99,7 @@ type ReqExternalIDs struct {
 type ReqJoinUser struct {
 	UserID string `json:"user_id"`
 }
+
+type ReqLoginAsUser struct {
+	AccessToken string `json:"access_token"`
+}
