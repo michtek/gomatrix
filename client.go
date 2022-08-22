@@ -782,6 +782,20 @@ func (cli *Client) TurnServer() (resp *RespTurnServer, err error) {
 	return
 }
 
+// Create, modify or delete notification pusher. See https://spec.matrix.org/v1.3/client-server-api/#post_matrixclientv3pushersset
+func (cli *Client) SetNotificationPusher(req *ReqNotificationPusher) (resp *RespNotificationPusher, err error) {
+	urlPath := cli.BuildURL("pushers", "set")
+	err = cli.MakeRequest("POST", urlPath, req, &resp)
+	return
+}
+
+// Get list of notifications See // Create, modify or delete notification pusher. See https://spec.matrix.org/v1.3/client-server-api/#post_matrixclientv3pushersset
+func (cli *Client) GetNotifications(req *ReqNotifications) (resp *RespNotifications, err error) {
+	urlPath := cli.BuildURL("notifications")
+	err = cli.MakeRequest("GET", urlPath, req, &resp)
+	return
+}
+
 // Create a new matrix user See https://matrix-org.github.io/synapse/latest/admin_api/user_admin_api.html
 func (cli *Client) CreateUser(userId string, req *ReqCreateUser) (resp *RespCreateUser, err error) {
 	urlPath := cli.BuildAdminURL("v2", "users", userId)
@@ -821,7 +835,7 @@ func NewClient(homeserverURL, userID, accessToken string) (*Client, error) {
 		AccessToken:   accessToken,
 		HomeserverURL: hsURL,
 		UserID:        userID,
-		Prefix:        "/_matrix/client/r0",
+		Prefix:        "/_matrix/client/v3",
 		AdminPrefix:   "/_synapse/admin",
 		Syncer:        NewDefaultSyncer(userID, store),
 		Store:         store,

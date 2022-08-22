@@ -103,3 +103,25 @@ type ReqJoinUser struct {
 type ReqLoginAsUser struct {
 	ValidUntilMs int64 `json:"valid_until_ms,omitempty"`
 }
+
+type ReqNotificationPusher struct {
+	AppDisplayName    string     `json:"app_display_name"`
+	AppId             string     `json:"app_id"`
+	Append            bool       `json:"append,omitempty"`
+	PusherData        PusherData `json:"data"`
+	DeviceDisplayName string     `json:"device_display_name"`
+	Kind              string     `json:"kind"`
+	Lang              string     `json:"lang"`
+	ProfileTag        string     `json:"profile_tag,omitempty"`
+	PushKey           string     `json:"push_kay"`
+}
+type PusherData struct {
+	Format string `json:"format,omitempty"`
+	Url    string `json:"url,omitempty"`
+}
+
+type ReqNotifications struct {
+	From  string `json:"from,omitempty"`
+	Limit int    `json:"limit,omitempty"`
+	Only  string `json:"only,omitempty"`
+}

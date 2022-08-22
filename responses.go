@@ -236,3 +236,19 @@ type RespCreateUser struct {
 type RespLoginAsUser struct {
 	AccessToken string `json:"access_token"`
 }
+
+type RespNotificationPusher struct{}
+
+type RespNotifications struct {
+	NextToken    string         `json:"next_token,omitempty"`
+	Notification []Notification `json:"notifications"`
+}
+
+type Notification struct {
+	Actions    interface{} `json:"actions"`
+	Event      Event       `json:"event"`
+	ProfileTag string      `json:"profile_tag,omitempty"`
+	Read       bool        `json:"read"`
+	RoomId     string      `json:"room_id"`
+	Timestamp  int64       `json:"ts"`
+}
