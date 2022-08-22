@@ -113,7 +113,7 @@ type ReqNotificationPusher struct {
 	Kind              string     `json:"kind"`
 	Lang              string     `json:"lang"`
 	ProfileTag        string     `json:"profile_tag,omitempty"`
-	PushKey           string     `json:"push_kay"`
+	Pushkey           string     `json:"pushkay"`
 }
 type PusherData struct {
 	Format string `json:"format,omitempty"`
