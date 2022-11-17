@@ -611,6 +611,12 @@ func (cli *Client) CreateRoom(req *ReqCreateRoom) (resp *RespCreateRoom, err err
 	return
 }
 
+func (cli *Client) GetRoom(alias string) (resp *RespGetRoom, err error) {
+	urlPath := cli.BuildURL("directory", "room", alias)
+	err = cli.MakeRequest("GET", urlPath, nil, &resp)
+	return
+}
+
 // LeaveRoom leaves the given room. See http://matrix.org/docs/spec/client_server/r0.2.0.html#post-matrix-client-r0-rooms-roomid-leave
 func (cli *Client) LeaveRoom(roomID string) (resp *RespLeaveRoom, err error) {
 	u := cli.BuildURL("rooms", roomID, "leave")
@@ -803,7 +809,13 @@ func (cli *Client) CreateUser(userId string, req *ReqCreateUser) (resp *RespCrea
 	return
 }
 
-// Create a new matrix user See https://matrix-org.github.io/synapse/latest/admin_api/user_admin_api.html
+// Delete room
+func (cli *Client) DeleteRoom(roomId string, req *ReqDeleteRoom) (resp *RespDeleteRoom, err error) {
+	urlPath := cli.BuildAdminURL("1", "rooms", roomId)
+	err = cli.MakeRequest("DELETE", urlPath, req, &resp)
+	return
+}
+
 func (cli *Client) JoinRoomForUser(roomId string, content interface{}) (resp *RespJoinRoom, err error) {
 	urlPath := cli.BuildAdminURL("v1", "join", roomId)
 	err = cli.MakeRequest("POST", urlPath, content, &resp)

@@ -125,3 +125,6 @@ type ReqNotifications struct {
 	Limit int    `json:"limit,omitempty"`
 	Only  string `json:"only,omitempty"`
 }
+
+type ReqDeleteRoom struct {
+}

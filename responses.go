@@ -252,3 +252,11 @@ type Notification struct {
 	RoomId     string      `json:"room_id"`
 	Timestamp  int64       `json:"ts"`
 }
+
+type RespDeleteRoom struct {
+}
+
+type RespGetRoom struct {
+	RoomId  string   `json:"room_id"`
+	Servers []string `json:"servers"`
+}
