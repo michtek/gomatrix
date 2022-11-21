@@ -811,7 +811,7 @@ func (cli *Client) CreateUser(userId string, req *ReqCreateUser) (resp *RespCrea
 
 // Delete room
 func (cli *Client) DeleteRoom(roomId string, req *ReqDeleteRoom) (resp *RespDeleteRoom, err error) {
-	urlPath := cli.BuildAdminURL("1", "rooms", roomId)
+	urlPath := cli.BuildAdminURL("v1", "rooms", roomId)
 	err = cli.MakeRequest("DELETE", urlPath, req, &resp)
 	return
 }
