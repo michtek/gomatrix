@@ -181,6 +181,13 @@ type RespSync struct {
 			} `json:"timeline"`
 		} `json:"leave"`
 		Join map[string]struct {
+			AccountData struct {
+				Events []Event `json:"events"`
+			} `json:"account_data"`
+			UnreadNotifications struct {
+				NotificationCount int `json:"notification_count"`
+				HighlightCount    int `json:"highlight_count"`
+			} `json:"unread_notifications"`
 			State struct {
 				Events []Event `json:"events"`
 			} `json:"state"`
