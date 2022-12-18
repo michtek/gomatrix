@@ -128,3 +128,6 @@ type ReqNotifications struct {
 
 type ReqDeleteRoom struct {
 }
+
+type ReqMarkRead struct {
+}
