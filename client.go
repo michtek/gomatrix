@@ -611,6 +611,7 @@ func (cli *Client) CreateRoom(req *ReqCreateRoom) (resp *RespCreateRoom, err err
 	return
 }
 
+//GetRoom
 func (cli *Client) GetRoom(alias string) (resp *RespGetRoom, err error) {
 	urlPath := cli.BuildURL("directory", "room", alias)
 	err = cli.MakeRequest("GET", urlPath, nil, &resp)
